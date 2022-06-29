@@ -7,7 +7,7 @@ from pystyle import Colors, Colorate
 import json
 import time
 
-token = int(input(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}+{Fore.LIGHTMAGENTA_EX}] {Fore.RESET}Token: {Fore.RESET}"))
+token = input(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}+{Fore.LIGHTMAGENTA_EX}] {Fore.RESET}Token: {Fore.RESET}")
 proxies = open("proxies.txt", "r").read().splitlines()
 
 ID = int(input(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}+{Fore.LIGHTMAGENTA_EX}] {Fore.RESET}ID: {Fore.RESET}"))
